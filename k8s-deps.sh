@@ -25,7 +25,7 @@ echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.
 # Install Kubernetes components
 echo "Installing Kubernetes components..."
 apt update
-apt install -y kubelet kubeadm kubectl kubernetes-cni containerd
+apt install -y kubelet kubeadm kubectl kubernetes-cni containerd net-tools
 
 # Create containerd configuration directory
 echo "Creating containerd configuration directory..."
