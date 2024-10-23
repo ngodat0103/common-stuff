@@ -72,5 +72,7 @@ sed -i "s/^KUBELET_EXTRA_ARGS=.*/KUBELET_EXTRA_ARGS=--node-ip=$(hostname -I | aw
 # Restart kubelet to apply changes
 echo "Restarting kubelet..."
 systemctl restart kubelet
-
+ystemctl stop apparmor
+systemctl disable apparmor
+systemctl restart containerd.service
 echo "All tasks completed successfully!"
