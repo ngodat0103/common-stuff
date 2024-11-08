@@ -1,0 +1,6 @@
+upstream_name: vault
+server_ip: 127.0.0.1
+server_port: 8200
+server_name: vault.ngodat0103.live
+ssl_certificate: /etc/letsencrypt/live/vault.ngodat0103.live/fullchain.pem 
+ssl_certificate_key: /etc/letsencrypt/live/vault.ngodat0103.live/privkey.pem
