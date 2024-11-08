@@ -1,0 +1,27 @@
+- name: Add Nginx conf
+  hosts: all
+  become: true
+  tasks:
+    - name: Make sure the conf file exists
+      ansible.builtin.file:
+        path: /etc/nginx/conf.d/
+        state: directory
+        mode: '0755'
+    - name: Add Nginx conf
+      ansible.builtin.template:
+        src: templates/default-nginx.conf.j2
+        dest: /etc/nginx/conf.d/{{ server_name }}.conf
+        mode: '0644'
+        owner: root
+    - name: Debug rendered template
+      ansible.builtin.debug:
+        msg: "{{ lookup('template', src='templates/default-nginx.conf.j2') }}"
+    - name: Check the conf is valid
+      ansible.builtin.command:
+        cmd: "nginx -t"
+      changed_when: false
+
+    - name: Reload Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: reloaded

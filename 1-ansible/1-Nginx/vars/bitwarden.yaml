@@ -1,0 +1,6 @@
+upstream_name: bitwarden
+server_ip: 192.168.1.198
+server_port: 80
+server_name: bitwarden.ngodat0103.live
+ssl_certificate: /etc/letsencrypt/live/bitwarden.ngodat0103.live/fullchain.pem 
+ssl_certificate_key: /etc/letsencrypt/live/bitwarden.ngodat0103.live/privkey.pem

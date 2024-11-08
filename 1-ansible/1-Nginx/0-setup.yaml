@@ -1,5 +1,5 @@
 - name: Ensure prequesite dependencies
-  hosts: all
+  hosts: akira-home
   become: true
   tasks:
    - name: Install prequesite deps

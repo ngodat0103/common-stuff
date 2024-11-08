@@ -1,0 +1,6 @@
+upstream_name: minio
+server_ip: 192.168.1.203
+server_port: 9000
+server_name: storage.ngodat0103.live
+ssl_certificate: /etc/letsencrypt/live/storage.ngodat0103.live/fullchain.pem 
+ssl_certificate_key: /etc/letsencrypt/live/storage.ngodat0103.live/privkey.pem
