@@ -1,0 +1,15 @@
+- name: Set up OpenVPN
+  hosts: all
+  tasks:
+    - name: Install OpenVPN
+      ansible.builtin.apt:
+        update_cache: true
+        name: openvpn
+        state: present
+    - name: Copy OpenVPN configuration
+      ansible.builtin.copy:
+        src: /etc/openvpn/server.conf
+        dest: /etc/openvpn/server.conf
+        owner: root
+        group: root
+        mode: '0600'

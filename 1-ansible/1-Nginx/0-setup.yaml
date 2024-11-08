@@ -1,0 +1,41 @@
+- name: Ensure prequesite dependencies
+  hosts: all
+  become: true
+  tasks:
+   - name: Install prequesite deps
+     ansible.builtin.apt:
+      name:
+       - curl
+       - gnupg2
+       - ca-certificates
+       - lsb-release
+       - debian-archive-keyring
+      state: present
+   - name: Download Nginx repository key
+     ansible.builtin.get_url:
+      url: https://nginx.org/keys/nginx_signing.key
+      mode: '0644'
+      dest: /tmp/nginx_signing.key
+   - name: Convert the key to .gpg format and move to /usr/share/keyrings
+     ansible.builtin.command:
+      cmd: "gpg --dearmor -o /usr/share/keyrings/nginx-archive-keyring.gpg /tmp/nginx_signing.key"
+      creates: /usr/share/keyrings/nginx-archive-keyring.gpg
+   - name: Clean up the downloaded key file
+     ansible.builtin.file:
+      path: /tmp/nginx_signing.key
+      state: absent
+   - name: Add Nginx repository
+     ansible.builtin.apt_repository:
+      filename: nginx
+      repo: "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/ubuntu jammy nginx"
+      state: present
+   - name: Install Nginx
+     ansible.builtin.apt:
+      name: nginx
+      state: present
+      update_cache: true
+   - name: Start Nginx Service
+     ansible.builtin.service:
+      name: nginx
+      enabled: true
+      state: started
