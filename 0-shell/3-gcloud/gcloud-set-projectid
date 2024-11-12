@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Fetch the list of projects and store them in a variable
+projects=$(gcloud projects list --format="value(projectId)")
+
+# Check if there are any projects available
+if [ -z "$projects" ]; then
+  echo "No projects found. Please make sure you are authenticated and have access to projects."
+  exit 1
+fi
+
+# Display the available projects with numbering
+echo "Available projects:"
+i=1
+for project in $projects; do
+  echo "$i. $project"
+  i=$((i+1))
+done
+
+# Ask the user to select a project
+echo -n "Enter the number of the project you want to switch to: "
+read project_choice
+
+# Validate user input
+if ! [[ "$project_choice" =~ ^[0-9]+$ ]]; then
+  echo "Invalid input. Please enter a number."
+  exit 1
+fi
+
+# Get the selected project ID
+selected_project=$(echo "$projects" | sed -n "${project_choice}p")
+
+# Check if the selected project exists
+if [ -z "$selected_project" ]; then
+  echo "Invalid selection. Please choose a valid project."
+  exit 1
+fi
+
+# Switch to the selected project using gcloud
+gcloud config set project "$selected_project"
+
+source ~/.bashrc
+# Confirm the switch
+echo "Successfully switched to project: $PROJECT_ID"
+
