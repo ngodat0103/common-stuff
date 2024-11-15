@@ -1,22 +1,26 @@
 #!/bin/bash
 
-# Define the alias and the command
-ALIAS_NAME="ksetns"
-ALIAS_COMMAND='alias ksetns="kubectl config set-context --current --namespace"'
+# Define aliases and their corresponding commands
+declare -A ALIASES=(
+    ["ksetns"]='alias ksetns="kubectl config set-context --current --namespace"'
+    ["kgp"]='alias kgp="kubectl get pod"'
+)
 
 # Path to the .bashrc file
 BASHRC_FILE="$HOME/.bashrc"
 
-# Check if the alias already exists in the .bashrc file
-if grep -q "$ALIAS_NAME=" "$BASHRC_FILE"; then
-    echo "Alias '$ALIAS_NAME' already exists in $BASHRC_FILE."
-else
-    # Add the alias to the .bashrc file
-    echo "$ALIAS_COMMAND" >> "$BASHRC_FILE"
-    echo "Alias '$ALIAS_NAME' added to $BASHRC_FILE."
-    
-    # Reload the .bashrc file to apply changes
-    source "$BASHRC_FILE"
-    echo "$ALIAS_NAME alias is now available."
-fi
+# Loop through each alias and add it if it doesn't already exist
+for ALIAS_NAME in "${!ALIASES[@]}"; do
+    ALIAS_COMMAND=${ALIASES[$ALIAS_NAME]}
+    if grep -q "$ALIAS_NAME=" "$BASHRC_FILE"; then
+        echo "Alias '$ALIAS_NAME' already exists in $BASHRC_FILE."
+    else
+        echo "$ALIAS_COMMAND" >> "$BASHRC_FILE"
+        echo "Alias '$ALIAS_NAME' added to $BASHRC_FILE."
+    fi
+done
+
+# Reload the .bashrc file to apply changes
+source "$BASHRC_FILE"
+echo "Aliases have been updated and are now available."
 
