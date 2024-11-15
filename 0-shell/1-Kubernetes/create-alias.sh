@@ -4,6 +4,7 @@
 declare -A ALIASES=(
     ["ksetns"]='alias ksetns="kubectl config set-context --current --namespace"'
     ["kgp"]='alias kgp="kubectl get pod"'
+    ["klogs"]='alias klogs="kubectl logs -f"'
 )
 
 # Path to the .bashrc file
@@ -23,4 +24,3 @@ done
 # Reload the .bashrc file to apply changes
 source "$BASHRC_FILE"
 echo "Aliases have been updated and are now available."
-
