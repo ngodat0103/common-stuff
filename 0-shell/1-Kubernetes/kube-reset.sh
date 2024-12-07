@@ -1,4 +1,4 @@
-kubeadm reset
+kubeadm reset --force
 rm -r /etc/cni
 # List rules.
 sudo iptables -L
