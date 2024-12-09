@@ -1,5 +1,6 @@
 kubeadm reset --force
 rm $HOME/.kube/config
+rm /etc/kubernetes/admin.conf
 rm -r /etc/cni
 # List rules.
 sudo iptables -L
