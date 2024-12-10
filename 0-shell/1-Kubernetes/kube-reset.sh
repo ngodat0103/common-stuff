@@ -1,3 +1,4 @@
+#!/bin/bash
 kubeadm reset --force
 rm $HOME/.kube/config
 rm /etc/kubernetes/admin.conf
