@@ -1,0 +1,16 @@
+name: gitlab
+services:
+  gitlab:
+    image: gitlab/gitlab-ee:17.5.5-ee.0@sha256:e7fd00e79bd0412b2fdc6cfdbded2eaefc43186ab9427d9aa881aec9b205a8da
+    volumes:
+      - /mnt/data2/gitlab/data:/var/opt/gitlab
+      - /mnt/data2/gitlab/log:/var/log/gitlab
+      - /mnt/data2/gitlab/config:/etc/gitlab
+    container_name: gitlab
+    networks:
+      mynet:
+        ipv4_address: "192.168.1.207"
+networks:
+  mynet:
+    external: true
+    name: "my_personal_things_mynet"
