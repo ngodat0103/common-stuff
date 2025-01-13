@@ -1,0 +1,20 @@
+name: docker-registry-cache
+services:
+  registry:
+    image: registry:2
+    container_name: registry
+    networks:
+      mynet:
+        ipv4_address: "192.168.1.206"
+    restart: always
+    ports:
+      - "5000:5000"
+    volumes:
+      - /mnt/data2/docker-registry-cache:/var/lib/registry
+      - ./config.yml:/etc/docker/registry/config.yml:ro
+    environment:
+      REGISTRY_HTTP_ADDR: 0.0.0.0:5000
+networks:
+  mynet:
+    external: true
+    name: my_personal_things_mynet
