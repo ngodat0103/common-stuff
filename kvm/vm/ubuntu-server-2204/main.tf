@@ -28,14 +28,14 @@ resource "libvirt_cloudinit_disk" "commoninit" {
   name           = "${var.vm_name}-commoninit.iso"
   user_data      = local.cloud_init_config
   network_config = local.cloud_network_config
-  pool           = var.pool_id
+  pool           = var.pool_name
   
 }
 
 
 resource "libvirt_volume" "vm_disk" {
   name   = "${var.vm_name}-vm-disk.qcow2"
-  pool   = var.pool_id
+  pool   = var.pool_name
   base_volume_id = var.base_volume_id
   size  = var.vm_disk_size
 }

@@ -32,9 +32,10 @@ variable "ssh_key" {
         type = string
         description = "The SSH key of the VM"
 }
-variable "pool_id" {
+variable "pool_name" {
         type = string
         description = "The pool id of the commoninit disk"
+        default = "default"
 }
 variable "base_volume_id" {
         type = string

@@ -22,21 +22,24 @@ variable "vm_network_name" {
 variable "vm_network_address" {
         type = list(string)
         description = "The network address of the VM"
+        default = [""]
 } 
 variable "username" {
         type = string
         default = "ubuntu"
         description = "The username of the VM"
 }
-variable "ssh_key" {
+variable "pool_name" {
         type = string
-        description = "The SSH key of the VM"
+        description = "The pool name of the commoninit disk"
+        default = "default"
 }
-variable "pool_id" {
+variable "hashed_password" {
         type = string
-        description = "The pool id of the commoninit disk"
+        description = "The hashed password of the VM"
+        sensitive = true
 }
-variable "base_volume_id" {
+variable "iso_volume_id" {
         type = string
-        description = "The base volume id of the VM disk"
+        description = "The volume id of the iso"
 }
