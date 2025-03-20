@@ -1,0 +1,14 @@
+[Unit]
+Description=Rclone onedrive-uit
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=rclone mount --vfs-cache-mode full onedrive-uit:/ /mnt/onedrive-uit/
+ExecStop=/bin/fusermount -u /mnt/onedrive-uit
+user=akira
+
+[Install]
+WantedBy=default.target
+

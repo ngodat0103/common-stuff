@@ -1,0 +1,13 @@
+[Unit]
+Description=Rclone onedrive-personal
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=rclone mount --vfs-cache-mode full onedrive-personal:/ /mnt/onedrive-personal/
+ExecStop=/bin/fusermount -u /mnt/onedrive-personal
+user=akira
+
+[Install]
+WantedBy=default.target
