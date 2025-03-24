@@ -1,0 +1,9 @@
+[Unit]
+Description= Samba mount
+After=network.target
+[Service]
+Type=exec
+EnvironmentFile=-/etc/environment
+ExecStart=/home/akira/code/common-stuff/5-service/samba-share/script.sh
+[Install]
+WantedBy=multi-user.target
