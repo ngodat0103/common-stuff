@@ -1,9 +1,11 @@
 [Unit]
 Description= Samba mount
 After=network.target
+Wants=network-online.target
 [Service]
-Type=exec
+user=akira
+Type=oneshot
 EnvironmentFile=-/etc/environment
 ExecStart=/home/akira/code/common-stuff/5-service/samba-share/script.sh
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target

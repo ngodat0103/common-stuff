@@ -5,7 +5,7 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-ExecStart=rclone mount --vfs-cache-mode full onedrive-uit:/ /mnt/onedrive-uit/
+ExecStart=rclone mount --vfs-cache-mode full --vfs-read-chunk-size 128M --vfs-write-back 5s --vfs-cache-max-age 48h --vfs-read-ahead 256M onedrive-uit:/ /mnt/onedrive-uit/
 ExecStop=/bin/fusermount -u /mnt/onedrive-uit
 user=akira
 

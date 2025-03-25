@@ -5,9 +5,8 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-ExecStart=rclone mount --vfs-cache-mode full onedrive-personal:/ /mnt/onedrive-personal/
+ExecStart=rclone mount --vfs-cache-mode full --vfs-read-chunk-size 128M --vfs-write-back 5s --vfs-cache-max-age 48h --vfs-read-ahead 256M onedrive-personal:/ /mnt/onedrive-personal/
 ExecStop=/bin/fusermount -u /mnt/onedrive-personal
-user=akira
 
 [Install]
 WantedBy=default.target
