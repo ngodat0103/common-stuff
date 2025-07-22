@@ -20,7 +20,8 @@ ExecStart=/usr/bin/rclone mount onedrive-personal:/ /home/akira/OneDrive \
     --vfs-read-chunk-size 128M \
     --vfs-read-chunk-size-limit 1G \
     --vfs-fast-fingerprint \
-    --log-level INFO
+    --log-level INFO \
+    --umask 077
 ExecStop=/bin/fusermount -u /home/akira/OneDrive
 Restart=always
 RestartSec=10
