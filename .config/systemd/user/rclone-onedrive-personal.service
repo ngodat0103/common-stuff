@@ -1,0 +1,34 @@
+[Unit]
+Description=OneDrive Personal Mount
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=notify
+ExecStart=/usr/bin/rclone mount onedrive-personal:/ /home/akira/OneDrive \
+    --config /home/akira/.config/rclone/rclone.conf \
+    --vfs-cache-mode full \
+    --cache-dir ~/.rclone/cache/ \
+    --vfs-cache-max-size 10G \
+    --vfs-cache-max-age 48h \
+    --vfs-write-back 10s \
+    --uid 1000 \
+    --gid 1000 \
+    --dir-cache-time 72h \
+    --poll-interval 15s \
+    --buffer-size 128M \
+    --vfs-read-chunk-size 128M \
+    --vfs-read-chunk-size-limit 1G \
+    --vfs-fast-fingerprint \
+    --log-level INFO
+ExecStop=/bin/fusermount -u /home/akira/OneDrive
+Restart=always
+RestartSec=10
+TimeoutSec=60
+Environment=PATH=/usr/bin:/bin
+Environment=HOME=/home/akira
+WorkingDirectory=/home/akira
+
+[Install]
+WantedBy=default.target
+
