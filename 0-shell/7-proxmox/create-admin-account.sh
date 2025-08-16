@@ -3,7 +3,7 @@ set -euo pipefail
 
 LOG_LIB_URL="${LOG_LIB_URL:-https://raw.githubusercontent.com/ngodat0103/common-stuff/b54ce2aeff431309f89261039115165d8c368cc0/0-shell/7-log/log.sh}"
 
-source <(curl -fsl ${LOG_LIB_URL})
+source <(curl -fsl ${LOG_LIB_URL}) || return
 
 # Create a PVE user and an API token with full privileges (inherits the user's rights)
 # Saves Terraform-friendly env vars to /root/<user>_api_token.env
