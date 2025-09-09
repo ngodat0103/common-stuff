@@ -1,7 +1,5 @@
 #!/bin/bash
 source <(curl -fsSL https://raw.githubusercontent.com/ngodat0103/common-stuff/refs/heads/main/0-shell/7-log/log.sh)
-
-set -e
 # Function to check if kubectl is available
 check_kubectl() {
     if ! command -v kubectl &> /dev/null; then
@@ -247,7 +245,7 @@ pre-shutdown-longhorn() {
     
     if [[ -z "$longhorn_pvcs" ]]; then
         print_warning "No Longhorn PVCs found in the cluster."
-        exit 0
+        return
     fi
     
     print_info "Found Longhorn PVCs:"
