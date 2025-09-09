@@ -1,5 +1,5 @@
 #!/bin/bash
-source <(curl -fsSL https://raw.githubusercontent.com/ngodat0103/common-stuff/refs/heads/main/shell/log/log.sh)
+source <(curl -fsSL https://raw.githubusercontent.com/ngodat0103/common-stuff/refs/heads/main/scripts/log/log.sh)
 
 set -e
 
